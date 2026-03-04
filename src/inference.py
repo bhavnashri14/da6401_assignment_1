@@ -37,16 +37,12 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def load_model(model_path,args):
-
-    weights = np.load(model_path,allow_pickle=True).item()
-    model = NeuralNetwork(args)
-
-    for i,layer in enumerate(model.layers):
-        layer.W = weights[f"W{i}"]
-        layer.b = weights[f"b{i}"]
-
-    return model
+def load_model(model_path):
+    """
+    Load trained model from disk.
+    """
+    data = np.load(model_path, allow_pickle=True).item()
+    return data
     
 def plot_cm(true,pred,class_names=None):
     cm = confusion_matrix(true,pred)
@@ -124,7 +120,9 @@ def main():
     args = parse_arguments()
     np.random.seed(42)
     X_train, y_train, X_test, y_test = load_data(args.dataset)
-    model = load_model(args.model_path,args)
+    weights = load_model(args.model_path)
+    model = NeuralNetwork(args)
+    model.set_weights(weights)
     results = evaluate_model(model, X_test, y_test)
 
     print("Results:")

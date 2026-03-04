@@ -32,8 +32,8 @@ class NeuralNetwork:
         weight_init = getattr(cli_args,"weight_init","xavier")
         loss = getattr(cli_args,"loss","cross_entropy")
         optimizer = getattr(cli_args,"optimizer","sgd")
-        lr = getattr(cli_args,"learning_rate",0.001)
-        wd = getattr(cli_args,"weight_decay",0.0)
+        learning_rate = getattr(cli_args,"learning_rate",0.001)
+        weight_decay = getattr(cli_args,"weight_decay",0.0)
 
         self.layers = []
         self.activations = []
@@ -54,7 +54,7 @@ class NeuralNetwork:
           in_dim = out_dim
 
         self.layers.append(
-            Layer(in_dim, output_size, cli_args.weight_init)
+            Layer(in_dim, output_size, weight_init)
         )
 
         self.output_activation = Softmax()
@@ -66,15 +66,32 @@ class NeuralNetwork:
           self.loss = CrossEntropy()
         
         if optimizer == "sgd":
-          self.optimizer = SGD(lr=cli_args.learning_rate,weight_decay=cli_args.weight_decay)
+          self.optimizer = SGD(lr=learning_rate,weight_decay=weight_decay)
         elif optimizer == "momentum":
-          self.optimizer = Momentum(lr=cli_args.learning_rate,weight_decay=cli_args.weight_decay)
+          self.optimizer = Momentum(lr=learning_rate,weight_decay=weight_decay)
         elif optimizer == "nag":
-          self.optimizer = NAG(lr=cli_args.learning_rate,weight_decay=cli_args.weight_decay)
+          self.optimizer = NAG(lr=learning_rate,weight_decay=weight_decay)
         elif optimizer == "rmsprop":
-          self.optimizer = RMSProp(lr=cli_args.learning_rate,weight_decay=cli_args.weight_decay)
+          self.optimizer = RMSProp(lr=learning_rate,weight_decay=weight_decay)
        
-             
+    def set_weights(self, weights):
+
+        for i, layer in enumerate(self.layers):
+
+            layer.W = weights[f"W{i}"]
+            layer.b = weights[f"b{i}"]
+    
+    def get_weights(self):
+
+        weights = {}
+
+        for i, layer in enumerate(self.layers):
+
+            weights[f"W{i}"] = layer.W
+            weights[f"b{i}"] = layer.b
+
+        return weights
+           
 
     def forward(self, X):
         """

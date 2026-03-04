@@ -44,13 +44,8 @@ def parse_arguments():
 
 def save_model(model, path):
 
-    weights = {}
-
-    for i,layer in enumerate(model.layers):
-        weights[f"W{i}"] = layer.W
-        weights[f"b{i}"] = layer.b
-
-    np.save(path, weights)
+    best_weights = model.get_weights()
+    np.save("best_model.npy", best_weights)
 
 def main():
   """
