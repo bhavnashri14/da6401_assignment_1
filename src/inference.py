@@ -13,7 +13,7 @@ from ann.data_loader import load_data
 from ann.neural_network import NeuralNetwork
 from ann.objective_functions import CrossEntropy, MSE
 
-def parse_arguments():
+def parse_arguments(args_list=None):
     """
     Parse command-line arguments for inference.
     
@@ -34,7 +34,7 @@ def parse_arguments():
     parser.add_argument('-sz', '--hidden_size', type=int,nargs='+',default=[128,128],help='Hidden Layer sizes')
     parser.add_argument('-a', '--activation', type=str,default='sigmoid',choices=['sigmoid','tanh','relu'],help='Activation')
 
-    return parser.parse_args()
+    return parser.parse_args(args_list)
 
 
 def load_model(model_path):
