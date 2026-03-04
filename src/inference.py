@@ -142,6 +142,7 @@ def main():
         "f1_score": results["f1"]
     })
     print("Evaluation complete!")
+    return results
 
 
 if __name__ == '__main__':
