@@ -26,9 +26,14 @@ class NeuralNetwork:
         input_size = 784
         output_size = 10
 
-        hidden_sizes = getattr(cli_args, "hidden_size", [128,128,128])
-        num_layers = getattr(cli_args, "num_layers", len(hidden_sizes))
-        optimizer = cli_args.optimizer
+        hidden_sizes = getattr(cli_args,"hidden_size",[128,128])
+        num_layers = getattr(cli_args,"num_layers",len(hidden_sizes))
+        activation = getattr(cli_args,"activation","relu")
+        weight_init = getattr(cli_args,"weight_init","xavier")
+        loss = getattr(cli_args,"loss","cross_entropy")
+        optimizer = getattr(cli_args,"optimizer","sgd")
+        lr = getattr(cli_args,"learning_rate",0.001)
+        wd = getattr(cli_args,"weight_decay",0.0)
 
         self.layers = []
         self.activations = []
@@ -37,13 +42,13 @@ class NeuralNetwork:
 
         for i in range(num_layers):
           out_dim = hidden_sizes[i]
-          self.layers.append(Layer(in_dim,out_dim,cli_args.weight_init))
+          self.layers.append(Layer(in_dim,out_dim,weight_init))
 
-          if cli_args.activation == "relu":
+          if activation == "relu":
             self.activations.append(ReLU())
-          elif cli_args.activation == "sigmoid":
+          elif activation == "sigmoid":
             self.activations.append(Sigmoid())
-          elif cli_args.activation == "tanh":
+          elif activation == "tanh":
             self.activations.append(Tanh())
           
           in_dim = out_dim
@@ -55,9 +60,9 @@ class NeuralNetwork:
         self.output_activation = Softmax()
 
 
-        if cli_args.loss == "mse":
+        if loss == "mse":
           self.loss = MSE()
-        elif cli_args.loss == "cross_entropy":
+        elif loss == "cross_entropy":
           self.loss = CrossEntropy()
         
         if optimizer == "sgd":
