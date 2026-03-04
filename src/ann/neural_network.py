@@ -26,8 +26,8 @@ class NeuralNetwork:
         input_size = 784
         output_size = 10
 
-        hidden_sizes = cli_args.hidden_size
-        num_layers = cli_args.num_layers
+        hidden_sizes = getattr(cli_args, "hidden_size", [128,128,128])
+        num_layers = getattr(cli_args, "num_layers", len(hidden_sizes))
         optimizer = cli_args.optimizer
 
         self.layers = []
