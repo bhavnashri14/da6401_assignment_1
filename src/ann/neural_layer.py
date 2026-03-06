@@ -22,7 +22,7 @@ class Layer:
     self.grad_b = None
 
   def forward(self, X):
-    self.X=X
+    self.X=X.copy()
     return X @ self.W + self.b
 
   def backward(self, delta):
