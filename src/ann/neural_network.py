@@ -130,7 +130,7 @@ class NeuralNetwork:
         grad_W.insert(0, self.layers[-1].grad_W)
         grad_b.insert(0, self.layers[-1].grad_b)
 
-        for i in reversed(range(len(self.layers))):
+        for i in reversed(range(len(self.activations))):
           delta = self.activations[i].backward(delta)      # compute grad_W and grad_b
           delta = self.layers[i].backward(delta) # apply activation derivative
           grad_W.insert(0, self.layers[i].grad_W)
