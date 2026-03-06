@@ -8,7 +8,7 @@ class ReLU:
     def __init__(self):
         self.A = None
     def forward(self, Z):
-        self.A = Z
+        self.Z = Z
         return np.maximum(0, self.A)
     def backward(self, dA):
         dZ = dA.copy()
