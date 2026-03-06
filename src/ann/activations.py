@@ -12,7 +12,7 @@ class ReLU:
         return np.maximum(0, self.A)
     def backward(self, dA):
         dZ = dA.copy()
-        dZ[self.A <= 0] = 0
+        dZ[self.Z <= 0] = 0
         return dZ
 
 class Sigmoid:
