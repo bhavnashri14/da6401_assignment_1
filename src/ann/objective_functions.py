@@ -12,7 +12,7 @@ class MSE:
 
   def backward(self, y_true, y_pred):
     N = y_true.shape[0]
-    dL =2*(y_pred - y_true)
+    dL =2*(y_pred - y_true)/N
     return dL
 
 
@@ -30,9 +30,9 @@ class CrossEntropy:
         return loss
 
     def backward(self, y_true, logits):
-
+        N = y_true.shape[0]
         prob = self.softmax(logits)
-        return (prob - y_true)
+        return (prob - y_true)/N
 
 
 
