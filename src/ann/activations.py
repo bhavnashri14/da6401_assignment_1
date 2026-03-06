@@ -8,11 +8,10 @@ class ReLU:
     def __init__(self):
         self.A = None
     def forward(self, Z):
-        self.A = Z
-        return np.maximum(0, self.A)
+        self.Z = Z
+        return np.maximum(0, self.Z)
     def backward(self, dA):
-        dZ = dA.copy()
-        dZ[self.A <= 0] = 0
+        dZ = dA * (self.Z > 0)
         return dZ
 
 class Sigmoid:
