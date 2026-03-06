@@ -129,15 +129,17 @@ class NeuralNetwork:
         delta = self.layers[-1].backward(delta)
     
         # output layer grads
-        grad_W.append(self.layers[-1].grad_W)
-        grad_b.append(self.layers[-1].grad_b)
+        grad_layers = [None] * len(self.layers)
+        grad_layers[-1] = (self.layers[-1].grad_W, self.layers[-1].grad_b)
         
         for i in reversed(range(len(self.activations))):
           delta = self.activations[i].backward(delta)
           delta = self.layers[i].backward(delta)
-          
-          grad_W.insert(0, self.layers[i].grad_W)
-          grad_b.insert(0, self.layers[i].grad_b)
+          grad_layers[i] = (self.layers[i].grad_W, self.layers[i].grad_b)
+
+        for gW, gB in grad_layers:
+            grad_W.append(gW)
+            grad_b.append(gB)
 
         return grad_W, grad_b
               
