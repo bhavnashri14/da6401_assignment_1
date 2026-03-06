@@ -28,6 +28,7 @@ class Layer:
   def backward(self, delta):
     
     self.grad_W = (self.X.T @ delta)
-    self.grad_b = (np.sum(delta, axis=0, keepdims=True))
+    self.grad_b = delta.copy()
+    self.grad_b = (np.sum(self.grad_b, axis=0, keepdims=True))
     grad_v = delta @ self.W.T
     return grad_v
