@@ -156,13 +156,13 @@ class NeuralNetwork:
 
         for epoch in range(epochs):
           idx = np.random.permutation(N)
-          X_train = X_train[idx]
-          y_train = y_train[idx]
+          X_train_shuffled = X_train[idx]
+          y_train_shuffled = y_train[idx]
           total_loss = 0
 
           for i in range(0,N, batch_size):
-            X_batch = X_train[i:i+batch_size]
-            y_batch = y_train[i:i+batch_size]
+            X_batch = X_train_shuffled[i:i+batch_size]
+            y_batch = y_train_shuffled[i:i+batch_size]
             y_pred = self.forward(X_batch)
             loss = self.loss.forward(y_batch, y_pred)
             total_loss+= loss
