@@ -32,7 +32,6 @@ class CrossEntropy:
     def backward(self, y_true, logits):
 
         prob = self.softmax(logits)
-        N = y_true.shape[0]
         return (prob - y_true)
 
 
