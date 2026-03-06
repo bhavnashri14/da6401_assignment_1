@@ -14,7 +14,7 @@ class NeuralNetwork:
     Main model class that orchestrates the neural network training and inference.
     """
     
-    def __init__(self, cli_args):
+    def __init__(self, cli_args, input_size=None, output_size=None):
         """
         Initialize the neural network.
 
@@ -23,8 +23,8 @@ class NeuralNetwork:
         """
         self.args = cli_args
 
-        input_size = input_size or 784
-        output_size = output_size or 10
+        self.input_size = input_size or 784
+        self.output_size = output_size or 10
 
         hidden_sizes = getattr(cli_args,"hidden_size",[128,128])
         num_layers = getattr(cli_args,"num_layers",len(hidden_sizes))
@@ -38,7 +38,7 @@ class NeuralNetwork:
         self.layers = []
         self.activations = []
 
-        in_dim = input_size
+        in_dim = self.input_size
 
         for i in range(num_layers):
           out_dim = hidden_sizes[i]
@@ -54,7 +54,7 @@ class NeuralNetwork:
           in_dim = out_dim
 
         self.layers.append(
-            Layer(in_dim, output_size, weight_init)
+            Layer(in_dim, self.output_size, weight_init)
         )
 
         self.output_activation = Softmax()
