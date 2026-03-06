@@ -22,10 +22,8 @@ class Layer:
     self.grad_b = None
 
   def forward(self, X):
-    self.X=X.copy()
-    print("Forward input shape:", X.shape)
-    print("Layer X stored shape:", self.X.shape)
-    return self.X @ self.W + self.b
+    self.X=X
+    return X @ self.W + self.b
 
   def backward(self, delta):
     
