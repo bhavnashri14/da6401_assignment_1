@@ -111,13 +111,13 @@ def evaluate_model(model, X_test, y_test):
 
 
 
-def main():
+def main(args_list=None):
     """
     Main inference function.
 
     TODO: Must return Dictionary - logits, loss, accuracy, f1, precision, recall
     """
-    args = parse_arguments()
+    args = parse_arguments(args_list)
     np.random.seed(42)
     X_train, y_train, X_test, y_test = load_data(args.dataset)
     weights = load_model(args.model_path)
