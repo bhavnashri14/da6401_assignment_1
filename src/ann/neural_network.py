@@ -126,9 +126,7 @@ class NeuralNetwork:
         grad_W = []
         grad_b = []
 
-        dA = self.loss.backward(y_true, y_pred)
-        dZ = self.output_activation.backward(dA)
-
+        dZ = self.loss.backward(y_true, y_pred)
         delta = self.layers[-1].backward(dZ)
 
         grad_W.append(self.layers[-1].grad_W)
