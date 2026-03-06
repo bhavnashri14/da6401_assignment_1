@@ -23,8 +23,8 @@ class NeuralNetwork:
         """
         self.args = cli_args
 
-        input_size = 784
-        output_size = 10
+        input_size = input_size or 784
+        output_size = output_size or 10
 
         hidden_sizes = getattr(cli_args,"hidden_size",[128,128])
         num_layers = getattr(cli_args,"num_layers",len(hidden_sizes))
