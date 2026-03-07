@@ -9,7 +9,7 @@ import wandb
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
-from ann.data_loader import load_data
+from utils.data_loader import load_data
 from ann.neural_network import NeuralNetwork
 from ann.objective_functions import CrossEntropy, MSE
 
