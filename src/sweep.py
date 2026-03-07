@@ -2,7 +2,7 @@
 import wandb
 import numpy as np
 import json
-from ann.neural_network import NeuralNetwork
+from src.ann.neural_network import NeuralNetwork
 from utils.data_loader import load_data
 from sklearn.metrics import f1_score
 
