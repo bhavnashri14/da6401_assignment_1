@@ -31,10 +31,10 @@ def parse_arguments(args_list=None):
     
     parser.add_argument('-m','--model_path', type=str,default='/da6401_assignment_1/src/best_model.npy',help='relative path to model')
     parser.add_argument('-d','--dataset',type=str,default='mnist',choices=['mnist','fashion_mnist'],help='dataset')
-    parser.add_argument('-b','--batch_size',type=int,default=64,help='batch size')
-    parser.add_argument('-nhl', '--num_layers', type=int,default=2,help='Number of hidden layers')
-    parser.add_argument('-sz', '--hidden_size', type=int,nargs='+',default=[128,128],help='Hidden Layer sizes')
-    parser.add_argument('-a', '--activation', type=str,default='sigmoid',choices=['sigmoid','tanh','relu'],help='Activation')
+    parser.add_argument('-b','--batch_size',type=int,default=32,help='batch size')
+    parser.add_argument('-nhl', '--num_layers', type=int,default=3,help='Number of hidden layers')
+    parser.add_argument('-sz', '--hidden_size', type=int,nargs='+',default=[256,128,64],help='Hidden Layer sizes')
+    parser.add_argument('-a', '--activation', type=str,default='relu',choices=['sigmoid','tanh','relu'],help='Activation')
 
     return parser.parse_args(args_list)
 
@@ -133,7 +133,7 @@ def main(args_list=None):
     for k,v in results.items():
         if k != "logits":
             print(k, ":", v)
-    wandb.init(project="da6401_assignment1_inference")
+    wandb.init(project="da6401_assignment1")
 
     wandb.log({
         "test_loss": results["loss"],
