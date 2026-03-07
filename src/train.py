@@ -5,8 +5,8 @@ Entry point for training neural networks with command-line arguments
 import numpy as np
 import wandb
 import argparse
-from src.ann.neural_network import NeuralNetwork
-from src.utils.data_loader import load_data
+from ann.neural_network import NeuralNetwork
+from utils.data_loader import load_data
 
 def parse_arguments():
     """

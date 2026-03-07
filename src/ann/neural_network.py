@@ -4,10 +4,10 @@ Handles forward and backward propagation loops
 """
 import numpy as np
 import wandb
-from src.ann.neural_layer import Layer
-from src.ann.activations import ReLU, Sigmoid, Tanh, Softmax
-from src.ann.optimizers import SGD, Momentum, NAG, RMSProp
-from src.ann.objective_functions import MSE,CrossEntropy
+from ann.neural_layer import Layer
+from ann.activations import ReLU, Sigmoid, Tanh, Softmax
+from ann.optimizers import SGD, Momentum, NAG, RMSProp
+from ann.objective_functions import MSE,CrossEntropy
 
 class NeuralNetwork:
     """
