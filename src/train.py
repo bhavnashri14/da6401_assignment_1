@@ -2,6 +2,9 @@
 Main Training Script
 Entry point for training neural networks with command-line arguments
 """
+import sys
+import os
+sys.path.insert(0, os.path.dirname(__file__))
 import numpy as np
 import wandb
 import argparse

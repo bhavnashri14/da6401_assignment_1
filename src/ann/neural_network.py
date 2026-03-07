@@ -2,6 +2,9 @@
 Main Neural Network Model class
 Handles forward and backward propagation loops
 """
+import sys
+import os
+sys.path.insert(0, os.path.dirname(__file__))
 import numpy as np
 import wandb
 from ann.neural_layer import Layer
