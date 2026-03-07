@@ -38,8 +38,8 @@ def parse_arguments():
     parser.add_argument('-nhl', '--num_layers', type=int,default=2,help='Batch size')
     parser.add_argument('-sz', '--hidden_size', type=int,nargs='+',default=[128,128],help='Hidden Layer sizes')
     parser.add_argument('-a', '--activation', type=str,default='sigmoid',choices=['sigmoid','tanh','relu'],help='Activation')
-    parser.add_argument('-wi', '--weight_init', type=str,default='xavier',choices=['random','xavier'],help='Weight initialisation')
-    parser.add_argument('-wp', '--wandb_project',type=str,default='da6401_assignment1',help='Weights and Biases Project ID')
+    parser.add_argument('-w_i', '--weight_init', type=str,default='xavier',choices=['random','xavier','zeros'],help='Weight initialisation')
+    parser.add_argument('-w_p', '--wandb_project',type=str,default='da6401_assignment1',help='Weights and Biases Project ID')
     return parser.parse_args()
 
 def save_model(model, path):
@@ -73,9 +73,9 @@ def main():
     )
 
   acc = model.evaluate(X_test, y_test)
-  wandb.log({"training_accuracy": acc})
+  wandb.log({"test_accuracy": acc})
   save_model(model,"model.npy")
-  print("Training Accuracy:", acc)
+  print("test Accuracy:", acc)
   print("Training complete!")
 
 

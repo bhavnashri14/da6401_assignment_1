@@ -10,13 +10,16 @@ class Layer:
 
   # Initialize weights
     if weight_init == 'random':
-      self.W = np.random.randn(in_features, out_features) * 0.01
+      self.W = np.random.randn(in_features, out_features) * 0.1
       self.b = np.zeros((1, out_features))
     elif weight_init == 'xavier':
       self.W = np.random.randn(in_features, out_features) * np.sqrt(2.0 /(in_features+out_features) )
       self.b = np.zeros((1, out_features))
+    elif weight_init == 'zeros':
+      self.W = np.zeros((in_features, out_features)) 
+      self.b = np.zeros((1, out_features))
     else:
-      raise ValueError("weight_init must be 'random' or 'xavier'")
+      raise ValueError("weight_init must be 'random' or 'xavier' or'zeros' ")
 
     self.grad_W = None
     self.grad_b = None
