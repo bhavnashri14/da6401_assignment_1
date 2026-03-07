@@ -29,7 +29,7 @@ def parse_arguments(args_list=None):
     """
     parser = argparse.ArgumentParser(description='Run inference on test set')
     
-    parser.add_argument('-m','--model_path', type=str,required=True,default='/da6401_assignment_1/src/inference.py'help='relative path to model')
+    parser.add_argument('-m','--model_path', type=str,required=True,default='/da6401_assignment_1/src/inference.py',help='relative path to model')
     parser.add_argument('-d','--dataset',type=str,default='mnist',choices=['mnist','fashion_mnist'],help='dataset')
     parser.add_argument('-b','--batch_size',type=int,default=64,help='batch size')
     parser.add_argument('-nhl', '--num_layers', type=int,default=2,help='Number of hidden layers')
