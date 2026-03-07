@@ -2,7 +2,9 @@
 Inference Script
 Evaluate trained models on test sets
 """
-
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 import argparse
 import numpy as np
 import wandb
@@ -27,7 +29,7 @@ def parse_arguments(args_list=None):
     """
     parser = argparse.ArgumentParser(description='Run inference on test set')
     
-    parser.add_argument('-m','--model_path', type=str,required=True,help='relative path to model')
+    parser.add_argument('-m','--model_path', type=str,required=True,default=help='relative path to model')
     parser.add_argument('-d','--dataset',type=str,default='mnist',choices=['mnist','fashion_mnist'],help='dataset')
     parser.add_argument('-b','--batch_size',type=int,default=64,help='batch size')
     parser.add_argument('-nhl', '--num_layers', type=int,default=2,help='Number of hidden layers')
@@ -52,7 +54,8 @@ def plot_cm(true,pred,class_names=None):
     disp.plot(ax=ax, cmap=plt.cm.Blues, values_format='d')
 
     plt.title("Confusion Matrix")
-    plt.show()
+    plt.savefig("confusion_matrix.png")
+    print("Saved confusion matrix to confusion_matrix.png")
 
 def evaluate_model(model, X_test, y_test): 
     """
